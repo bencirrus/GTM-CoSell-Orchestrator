@@ -39,7 +39,7 @@ async function init() {
       <footer class="mt-8 text-xs text-gray-400">
         Built as a demo GTM & co-sell orchestration tool aligned to Microsoft partner motions.
         <br />
-        <a href="https://github.com/YOUR_USERNAME/YOUR_REPO" class="text-blue-600 underline">
+        <a href="https://github.com/bencirrus/GTM-CoSell-Orch" class="text-blue-600 underline">
           View on GitHub
         </a>
       </footer>
