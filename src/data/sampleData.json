@@ -1,0 +1,80 @@
+{
+  "solutionAreas": [
+    "Applications & Infrastructure",
+    "Data & AI",
+    "Modern Work",
+    "Business Applications",
+    "Security"
+  ],
+  "coSellLifecycle": [
+    { "stage": "Build", "description": "Develop solution aligned to Microsoft cloud and industry plays." },
+    { "stage": "Publish", "description": "List solution in Azure Marketplace or AppSource." },
+    { "stage": "Co-Sell", "description": "Engage Microsoft field sellers and submit opportunities in Partner Center." },
+    { "stage": "Scale", "description": "Expand to new markets, industries, and geographies." }
+  ],
+  "coSellRequirements": [
+    "Solution listed in Azure Marketplace or AppSource",
+    "Meets Microsoft security and compliance standards",
+    "Has customer success stories",
+    "Includes sales collateral (pitch deck, one-pager)",
+    "Supports Microsoft solution area priorities",
+    "Partner Center co-sell status: 'Co-Sell Ready' or 'IP Co-Sell Ready'"
+  ],
+  "assetTypes": [
+    "Pitch Deck",
+    "One-Pager",
+    "Solution Brief",
+    "Customer Case Study",
+    "Demo Video",
+    "Marketplace Listing",
+    "Industry Play Alignment Document"
+  ],
+  "incentives": [
+    { "id": "inc001", "name": "Azure Consumption Incentives", "type": "Usage-Based", "status": "Active" },
+    { "id": "inc002", "name": "Modern Work Seat Incentives", "type": "Seat-Based", "status": "Planned" },
+    { "id": "inc003", "name": "Business Applications Incentives", "type": "Usage-Based", "status": "Active" },
+    { "id": "inc004", "name": "Co-Op Marketing Funds", "type": "Marketing", "status": "Available" },
+    { "id": "inc005", "name": "Partner Investment Engine (PIE)", "type": "Funding", "status": "Available" }
+  ],
+  "solutionPlays": [
+    "Azure Migrate & Modernize",
+    "Azure Innovate",
+    "Security Zero Trust",
+    "Copilot for Microsoft 365 Adoption",
+    "Dynamics 365 Customer Experience",
+    "Industry Cloud for Healthcare",
+    "Industry Cloud for Financial Services"
+  ],
+  "campaigns": [
+    {
+      "id": "cmp001",
+      "name": "Azure Migrate & Modernize with Avanade",
+      "solutionArea": "Applications & Infrastructure",
+      "solutionPlay": "Azure Migrate & Modernize",
+      "industry": "Financial Services",
+      "assets": ["Pitch Deck", "One-Pager", "Customer Case Study"],
+      "readiness": {
+        "marketplaceListing": true,
+        "coSellEligible": true,
+        "fieldTrainingComplete": false,
+        "incentivesAligned": true
+      },
+      "launchDate": "2025-04-15"
+    },
+    {
+      "id": "cmp002",
+      "name": "Copilot for Microsoft 365 Adoption with Accenture",
+      "solutionArea": "Modern Work",
+      "solutionPlay": "Copilot for Microsoft 365 Adoption",
+      "industry": "Professional Services",
+      "assets": ["Pitch Deck", "Solution Brief"],
+      "readiness": {
+        "marketplaceListing": false,
+        "coSellEligible": false,
+        "fieldTrainingComplete": false,
+        "incentivesAligned": true
+      },
+      "launchDate": "2025-06-01"
+    }
+  ]
+}
