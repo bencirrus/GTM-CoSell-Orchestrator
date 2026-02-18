@@ -1,4 +1,4 @@
-const CACHE_NAME = "gtm-hub-cache-v2";
+const CACHE_NAME = "gtm-hub-cache-v3";
 
 const OFFLINE_URLS = [
   "./",
@@ -22,6 +22,7 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((cached) => {
       if (cached) return cached;
+
       return fetch(event.request).catch(() => caches.match("./index.html"));
     })
   );
