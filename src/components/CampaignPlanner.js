@@ -27,8 +27,10 @@ export function renderCampaigns(container, data) {
                 Launch: ${c.launchDate}
               </span>
             </div>
+
             <p class="text-sm mb-2"><strong>Assets:</strong> ${c.assets.join(", ")}</p>
             <p class="text-sm mb-2"><strong>Readiness:</strong> ${readinessLabel}</p>
+
             <div class="grid grid-cols-2 gap-2 text-xs">
               <span class="px-2 py-1 rounded ${c.readiness.marketplaceListing ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-500"}">
                 Marketplace Listing
