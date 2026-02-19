@@ -1,93 +1,84 @@
-:root {
-  --bg: #f7f9fc;
-  --card: #ffffff;
-  --text: #1a1a1a;
-  --muted: #666;
-  --primary: #2563eb;
-  --border: #ddd;
-  --radius: 18px;
-}
-
 body {
+  font-family: Arial, sans-serif;
   margin: 0;
-  font-family: system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  padding: 0;
+  background: #f8f8f8;
+  color: #222;
 }
 
-.app-header {
-  padding: 1.5rem;
-  background: var(--primary);
+header {
+  background: #003366;
   color: white;
+  padding: 20px;
   text-align: center;
 }
 
-.app-header h1 {
-  margin: 0;
-  font-size: 1.8rem;
+main {
+  padding: 20px;
 }
 
-.app-header p {
-  margin-top: 0.3rem;
-  opacity: 0.85;
+section {
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
 }
 
-.container {
-  padding: 1rem;
-  max-width: 700px;
-  margin: auto;
-}
-
-.card {
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 1.2rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-}
-
-.card h2 {
+h2 {
   margin-top: 0;
-  font-size: 1.3rem;
 }
 
 .readiness-item {
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 0.8rem;
-  margin-bottom: 1rem;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background: #fafafa;
 }
 
 .readiness-item label {
+  font-weight: bold;
   display: block;
-  font-weight: 600;
-  margin-bottom: 0.4rem;
+  margin-bottom: 8px;
 }
 
 .select-row {
   display: flex;
-  gap: 0.5rem;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
 select {
-  flex: 1;
-  padding: 0.5rem;
-  border-radius: 12px;
-  border: 1px solid var(--border);
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  min-width: 140px;
 }
 
-.score-box {
-  text-align: center;
-  padding: 1rem;
-  background: #eef4ff;
-  border-radius: var(--radius);
-  font-size: 1.2rem;
+/* ✅ Progress Bar */
+.progress-wrapper {
+  margin-top: 20px;
 }
 
-.footer {
+.progress-bar {
+  width: 100%;
+  height: 18px;
+  background: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+#progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #003366;
+  transition: width 0.3s ease;
+}
+
+footer {
   text-align: center;
-  padding: 1rem;
+  padding: 15px;
   font-size: 0.85rem;
-  color: var(--muted);
+  color: #666;
 }
