@@ -6,37 +6,34 @@
 
   <title>GTM Co-Sell Orchestrator</title>
 
+  <!-- Required for GitHub Pages -->
   <base href="./" />
 
-  <link rel="stylesheet" href="style.css" />
+  <!-- Original styling -->
+  <link rel="stylesheet" href="src/styles.css" />
 </head>
 
 <body>
-  <header class="app-header">
-    <h1>Co-Sell Orchestrator</h1>
-    <p>Interactive GTM Readiness + Incentive Prioritization</p>
+  <header>
+    <h1>GTM Co-Sell Orchestrator</h1>
+    <p>Partner GTM execution + readiness planning</p>
   </header>
 
-  <main class="container">
+  <main>
 
-    <!-- Readiness Panel -->
-    <section class="card">
+    <!-- ✅ Original Readiness Section Layout -->
+    <section id="readiness">
       <h2>Co-Sell Readiness Planner</h2>
 
+      <p>Select readiness priority + timeline alignment:</p>
+
+      <!-- Dynamic readiness checklist -->
       <div id="readiness-list"></div>
 
-      <div class="score-box">
-        <strong>Total Readiness Score:</strong>
-        <span id="score">0</span>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    Built for partner GTM execution • Mobile optimized
-  </footer>
-
-  <script src="src/app.js"></script>
-
-  <!--
+      <!-- Progress Bar -->
+      <div class="progress-wrapper">
+        <label><strong>Readiness Progress:</strong></label>
+        <div class="progress-bar">
+          <div id="progress-fill"></div>
+        </div>
+        <p><span id="progress-percent">0%</span> Ready</
