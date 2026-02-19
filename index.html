@@ -22,6 +22,16 @@
     <div id="app" class="min-h-screen"></div>
 
     <!-- Main App -->
-    <script type="module" src="../src/app.js"></script>
+    <script type="module" src="src/app.js"></script>
+      <!-- ✅ Safe service worker registration -->
+    <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("service-worker.js")
+        .catch((err) => {
+          console.warn("ServiceWorker registration failed:", err);
+        });
+    }
+    </script>
   </body>
 </html>
