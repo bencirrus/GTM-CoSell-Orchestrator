@@ -1,39 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="utf-8" />
+    <title>GTM & Co-Sell Orchestration Hub</title>
+    <base href="./">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>GTM Co-Sell Orchestrator</title>
+    <!-- PWA manifest -->
+    <link rel="manifest" href="./manifest.json" />
 
-  <!-- Required for GitHub Pages -->
-  <base href="./" />
+    <meta name="theme-color" content="#2563eb" />
 
-  <!-- Original styling -->
-  <link rel="stylesheet" href="src/styles.css" />
-</head>
+    <!-- Tailwind -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    />
+  </head>
 
-<body>
-  <header>
-    <h1>GTM Co-Sell Orchestrator</h1>
-    <p>Partner GTM execution + readiness planning</p>
-  </header>
+  <body class="bg-gray-100 text-gray-900">
+    <div id="app" class="min-h-screen"></div>
 
-  <main>
-
-    <!-- ✅ Original Readiness Section Layout -->
-    <section id="readiness">
-      <h2>Co-Sell Readiness Planner</h2>
-
-      <p>Select readiness priority + timeline alignment:</p>
-
-      <!-- Dynamic readiness checklist -->
-      <div id="readiness-list"></div>
-
-      <!-- Progress Bar -->
-      <div class="progress-wrapper">
-        <label><strong>Readiness Progress:</strong></label>
-        <div class="progress-bar">
-          <div id="progress-fill"></div>
-        </div>
-        <p><span id="progress-percent">0%</span> Ready</
+    <!-- Main App -->
+    <script type="module" src="src/app.js"></script>
+      <!-- ✅ Safe service worker registration -->
+    <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("service-worker.js")
+        .catch((err) => {
+          console.warn("ServiceWorker registration failed:", err);
+        });
+    }
+    </script>
+  </body>
+</html>
