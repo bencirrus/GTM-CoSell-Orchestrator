@@ -1,56 +1,106 @@
-import { renderCampaigns } from "./components/CampaignPlanner.js";
-import { renderCoSellChecklist } from "./components/CoSellChecklist.js";
-import { renderIncentives } from "./components/IncentivesTracker.js";
-
-async function loadData() {
-  const res = await fetch("./src/data/sampleData.json");
-  return res.json();
-}
-
-function registerServiceWorker() {
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker
-      .register("./public/service-worker.js")
-      .catch((err) => console.error("SW registration failed", err));
+const readinessItems = [
+  {
+    title: "Partner Incentives & Funding Approved",
+    weight: 5
+  },
+  {
+    title: "Joint Customer Target Identified",
+    weight: 4
+  },
+  {
+    title: "Microsoft Solution Play Alignment",
+    weight: 3
+  },
+  {
+    title: "Co-Sell Motion + Timeline Defined",
+    weight: 4
+  },
+  {
+    title: "Field Seller Engagement Scheduled",
+    weight: 2
   }
+];
+
+const priorityScores = {
+  High: 3,
+  Medium: 2,
+  Low: 1
+};
+
+const timelineScores = {
+  "Now": 3,
+  "Next 30 Days": 2,
+  "This Quarter": 1
+};
+
+const fundingScores = {
+  "Funding Available": 3,
+  "Not Yet": 1
+};
+
+function calculateScore() {
+  let total = 0;
+
+  readinessItems.forEach((item, index) => {
+    const priority = document.getElementById(`priority-${index}`).value;
+    const timeline = document.getElementById(`timeline-${index}`).value;
+    const funding = document.getElementById(`funding-${index}`).value;
+
+    const score =
+      item.weight *
+      priorityScores[priority] *
+      timelineScores[timeline] *
+      fundingScores[funding];
+
+    total += score;
+  });
+
+  document.getElementById("score").innerText = total;
 }
 
-async function init() {
-  const app = document.getElementById("app");
-  const data = await loadData();
+function renderReadiness() {
+  const container = document.getElementById("readiness-list");
 
-  app.innerHTML = `
-    <div class="max-w-5xl mx-auto py-6 px-4">
-      <header class="mb-6">
-        <h1 class="text-2xl font-bold mb-1">GTM & Co-Sell Orchestration Hub</h1>
-        <p class="text-sm text-gray-600">
-          Plan and track Microsoft-aligned GTM campaigns, co-sell readiness, and incentives.
-        </p>
-      </header>
+  readinessItems.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.className = "readiness-item";
 
-      <main class="grid md:grid-cols-3 gap-6">
-        <section class="md:col-span-2" id="campaigns-section"></section>
-        <section class="space-y-6">
-          <div id="cosell-section"></div>
-          <div id="incentives-section"></div>
-        </section>
-      </main>
+    div.innerHTML = `
+      <label>${item.title}</label>
 
-      <footer class="mt-8 text-xs text-gray-400">
-        Built as a demo GTM & co-sell orchestration tool aligned to Microsoft partner motions.
-        <br />
-        <a href="https://github.com/bencirrus/GTM-CoSell-Orch" class="text-blue-600 underline">
-          View on GitHub
-        </a>
-      </footer>
-    </div>
-  `;
+      <div class="select-row">
+        <select id="priority-${index}">
+          <option>High</option>
+          <option>Medium</option>
+          <option>Low</option>
+        </select>
 
-  renderCampaigns(document.getElementById("campaigns-section"), data);
-  renderCoSellChecklist(document.getElementById("cosell-section"), data);
-  renderIncentives(document.getElementById("incentives-section"), data);
+        <select id="timeline-${index}">
+          <option>Now</option>
+          <option>Next 30 Days</option>
+          <option>This Quarter</option>
+        </select>
 
-  registerServiceWorker();
+        <select id="funding-${index}">
+          <option>Funding Available</option>
+          <option>Not Yet</option>
+        </select>
+      </div>
+    `;
+
+    container.appendChild(div);
+  });
+
+  // Attach listeners
+  readinessItems.forEach((_, index) => {
+    ["priority", "timeline", "funding"].forEach((type) => {
+      document
+        .getElementById(`${type}-${index}`)
+        .addEventListener("change", calculateScore);
+    });
+  });
+
+  calculateScore();
 }
 
-init();
+renderReadiness();
