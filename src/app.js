@@ -1,95 +1,56 @@
-console.log("✅ Co-Sell Readiness Planner Loaded");
+import { renderCampaigns } from "./components/CampaignPlanner.js";
+import { renderCoSellChecklist } from "./components/CoSellChecklist.js";
+import { renderIncentives } from "./components/IncentivesTracker.js";
 
-/* Readiness Items */
-const readinessItems = [
-  { title: "Partner Incentives & Funding Approved", weight: 5 },
-  { title: "Joint Customer Target Identified", weight: 4 },
-  { title: "Microsoft Solution Play Alignment", weight: 3 },
-  { title: "Co-Sell Motion + Timeline Defined", weight: 4 },
-  { title: "Field Seller Engagement Scheduled", weight: 2 }
-];
-
-/* Scoring Models */
-const priorityScores = { High: 3, Medium: 2, Low: 1 };
-const timelineScores = { Now: 3, "Next 30 Days": 2, "This Quarter": 1 };
-const fundingScores = { "Funding Available": 3, "Not Yet": 1 };
-
-const maxScorePerItem = 5 * 3 * 3 * 3; // max possible
-const maxTotalScore = readinessItems.length * maxScorePerItem;
-
-/* Calculate Score + Progress */
-function calculateScore() {
-  let total = 0;
-
-  readinessItems.forEach((item, index) => {
-    const priority = document.getElementById(`priority-${index}`).value;
-    const timeline = document.getElementById(`timeline-${index}`).value;
-    const funding = document.getElementById(`funding-${index}`).value;
-
-    const score =
-      item.weight *
-      priorityScores[priority] *
-      timelineScores[timeline] *
-      fundingScores[funding];
-
-    total += score;
-  });
-
-  /* Update score display */
-  document.getElementById("score").innerText = total;
-
-  /* Progress % */
-  const percent = Math.round((total / maxTotalScore) * 100);
-
-  document.getElementById("progress-percent").innerText = percent + "%";
-  document.getElementById("progress-fill").style.width = percent + "%";
+async function loadData() {
+  const res = await fetch("./src/data/sampleData.json");
+  return res.json();
 }
 
-/* Render Planner UI */
-function renderReadiness() {
-  const container = document.getElementById("readiness-list");
-
-  readinessItems.forEach((item, index) => {
-    const div = document.createElement("div");
-    div.className = "readiness-item";
-
-    div.innerHTML = `
-      <label>${item.title}</label>
-
-      <div class="select-row">
-        <select id="priority-${index}">
-          <option>High</option>
-          <option selected>Medium</option>
-          <option>Low</option>
-        </select>
-
-        <select id="timeline-${index}">
-          <option selected>Now</option>
-          <option>Next 30 Days</option>
-          <option>This Quarter</option>
-        </select>
-
-        <select id="funding-${index}">
-          <option selected>Funding Available</option>
-          <option>Not Yet</option>
-        </select>
-      </div>
-    `;
-
-    container.appendChild(div);
-  });
-
-  /* Add change listeners */
-  readinessItems.forEach((_, index) => {
-    ["priority", "timeline", "funding"].forEach((type) => {
-      document
-        .getElementById(`${type}-${index}`)
-        .addEventListener("change", calculateScore);
-    });
-  });
-
-  calculateScore();
+function registerServiceWorker() {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("./public/service-worker.js")
+      .catch((err) => console.error("SW registration failed", err));
+  }
 }
 
-/* Load after DOM ready */
-window.addEventListener("DOMContentLoaded", renderReadiness);
+async function init() {
+  const app = document.getElementById("app");
+  const data = await loadData();
+
+  app.innerHTML = `
+    <div class="max-w-5xl mx-auto py-6 px-4">
+      <header class="mb-6">
+        <h1 class="text-2xl font-bold mb-1">GTM & Co-Sell Orchestration Hub</h1>
+        <p class="text-sm text-gray-600">
+          Plan and track Microsoft-aligned GTM campaigns, co-sell readiness, and incentives.
+        </p>
+      </header>
+
+      <main class="grid md:grid-cols-3 gap-6">
+        <section class="md:col-span-2" id="campaigns-section"></section>
+        <section class="space-y-6">
+          <div id="cosell-section"></div>
+          <div id="incentives-section"></div>
+        </section>
+      </main>
+
+      <footer class="mt-8 text-xs text-gray-400">
+        Built as a demo GTM & co-sell orchestration tool aligned to Microsoft partner motions.
+        <br />
+        <a href="https://github.com/bencirrus/GTM-CoSell-Orch" class="text-blue-600 underline">
+          View on GitHub
+        </a>
+      </footer>
+    </div>
+  `;
+
+  renderCampaigns(document.getElementById("campaigns-section"), data);
+  renderCoSellChecklist(document.getElementById("cosell-section"), data);
+  renderIncentives(document.getElementById("incentives-section"), data);
+
+  registerServiceWorker();
+}
+
+init();
